@@ -1,8 +1,8 @@
-# Likker
+# Laravel Likker
 
 [![Software License](https://img.shields.io/badge/license-MIT-brightgreen.svg?style=flat-square)](LICENSE.md)
-[![Travis](https://img.shields.io/travis/Bitfumes/Likker.svg?style=flat-square)]()
-[![Total Downloads](https://img.shields.io/packagist/dt/Bitfumes/Likker.svg?style=flat-square)](https://packagist.org/packages/bitfumes/likker)
+[![Travis](https://img.shields.io/travis/Bitfumes/laravel-likker.svg?style=flat-square)]()
+[![Total Downloads](https://img.shields.io/packagist/dt/Bitfumes/laravel-likker.svg?style=flat-square)](https://packagist.org/packages/bitfumes/laravel-likker)
 
 ## Introduction
 
@@ -10,7 +10,7 @@ This package helps you to have like system in any model. It has very simple api 
 
 ## Install
 
-`composer require Bitfumes/Likker`
+`composer require Bitfumes/laravel-likker`
 
 ## Usage
 
