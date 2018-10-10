@@ -1,8 +1,10 @@
 # Laravel Likker
 
 [![Software License](https://img.shields.io/badge/license-MIT-brightgreen.svg?style=flat-square)](LICENSE.md)
-[![Travis](https://img.shields.io/travis/Bitfumes/laravel-likker.svg?style=flat-square)]()
+[![Build Status](https://scrutinizer-ci.com/g/bitfumes/laravel-likker/badges/build.png?b=master)](https://scrutinizer-ci.com/g/bitfumes/laravel-likker/build-status/master)
 [![Total Downloads](https://img.shields.io/packagist/dt/Bitfumes/laravel-likker.svg?style=flat-square)](https://packagist.org/packages/bitfumes/laravel-likker)
+[![GitHub stars](https://img.shields.io/github/stars/bitfumes/laravel-likker.svg)](https://github.com/bitfumes/laravel-likker/stargazers)
+[![GitHub issues](https://img.shields.io/github/issues/bitfumes/laravel-likker.svg)](https://github.com/bitfumes/laravel-likker/issues)
 
 ## Introduction
 
