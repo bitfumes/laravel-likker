@@ -8,7 +8,7 @@ class LikeTest extends TestCase
 {
     protected $post;
 
-    public function setup()
+    public function setup():void
     {
         parent::setUp();
         $this->post = $this->createPost();

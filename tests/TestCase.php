@@ -9,7 +9,7 @@ use Bitfumes\Likker\Tests\Models\User;
 
 class TestCase extends BaseTestCase
 {
-    public function setup()
+    public function setup() :void
     {
         parent::setUp();
         $this->withoutExceptionHandling();

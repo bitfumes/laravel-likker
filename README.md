@@ -12,7 +12,7 @@ This package helps you to have like system in any model. It has very simple api 
 
 ## Install
 
-`composer require Bitfumes/laravel-likker`
+`composer require bitfumes/laravel-likker`
 
 ## Usage
 
