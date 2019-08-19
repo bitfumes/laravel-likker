@@ -41,7 +41,7 @@ class LikeTest extends TestCase
         $this->post->likeIt();
         $this->assertDatabaseHas('likes', ['likeable_type'=>get_class($this->post)]);
         $this->assertDatabaseHas('like_counts', ['count'=>1]);
-        $this->post->unLikeIt();
+        $this->post->fresh()->unLikeIt();
         $this->assertDatabaseHas('like_counts', ['count'=>0]);
         $this->assertDatabaseMissing('likes', ['likeable_type'=>get_class($this->post)]);
     }
@@ -52,8 +52,8 @@ class LikeTest extends TestCase
         $user = $this->createLoggedInUser();
         $this->post->likeIt();
         $user = $this->createUser();
-        $this->post->likeIt($user);
-        $this->assertEquals(2, $this->post->likeCounts->count);
+        $this->post->fresh()->likeIt($user);
+        $this->assertEquals(2, $this->post->fresh()->likeCounts->count);
         $this->assertDatabaseHas('likes', ['user_id'=>$user->id]);
     }
 
@@ -63,7 +63,7 @@ class LikeTest extends TestCase
         $user = $this->createLoggedInUser();
         $this->post->toggleLike();
         $this->assertDatabaseHas('likes', ['user_id'=>$user->id]);
-        $this->post->toggleLike();
+        $this->post->fresh()->toggleLike();
         $this->assertDatabaseMissing('likes', ['user_id'=>$user->id]);
     }
 
@@ -73,7 +73,7 @@ class LikeTest extends TestCase
         $user = $this->createUser();
         $this->post->toggleLike($user);
         $this->assertDatabaseHas('likes', ['user_id'=>$user->id]);
-        $this->post->toggleLike($user);
+        $this->post->fresh()->toggleLike($user);
         $this->assertDatabaseMissing('likes', ['user_id'=>$user->id]);
     }
 
@@ -82,8 +82,8 @@ class LikeTest extends TestCase
     {
         $this->createLoggedInUser();
         $this->post->likeIt();
-        $this->post->likeIt();
-        $this->assertEquals(1, $this->post->load('likeCounts')->likeCounts->count);
+        $this->post->fresh()->likeIt();
+        $this->assertEquals(1, $this->post->fresh()->likeCounts->count);
     }
 
     /** @test */
@@ -92,9 +92,9 @@ class LikeTest extends TestCase
         $this->createLoggedInUser();
         // DB::enableQueryLog();
         $this->post->likeIt();
-        $this->post->unLikeIt();
+        $this->post->fresh()->unLikeIt();
         $this->post->unLikeIt();
         // dd(DB::getQueryLog());
-        $this->assertEquals(0, $this->post->likeCounts->count);
+        $this->assertEquals(0, $this->post->fresh()->likeCounts->count);
     }
 }

@@ -60,7 +60,7 @@ trait CanBeLiked
      */
     public function isLiked($user = null)
     {
-        return $this->load('likes')->likes->where('user_id', $user ? $user->id : auth()->id())->first();
+        return $this->likes->where('user_id', $user ? $user->id : auth()->id())->first();
     }
 
     /**
@@ -88,10 +88,10 @@ trait CanBeLiked
      */
     public function incrementCount()
     {
-        if (!$this->likeCounts()->count()) {
+        if (!$this->countLikes()) {
             return $this->likeCounts()->create();
         }
-        $this->likeCounts()->increment('count');
+        $this->likeCounts->increment('count');
     }
 
     /**
@@ -99,6 +99,6 @@ trait CanBeLiked
      */
     public function decrementCount()
     {
-        $this->likeCounts()->decrement('count');
+        $this->likeCounts->decrement('count');
     }
 }

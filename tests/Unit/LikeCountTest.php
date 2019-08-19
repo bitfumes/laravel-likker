@@ -21,9 +21,9 @@ class LikeCountTest extends TestCase
         $this->createLoggedInUser();
         $this->post->likeIt();
         $this->createLoggedInUser();
-        $this->post->likeIt();
+        $this->post->fresh()->likeIt();
         // DB::enableQueryLog();
-        $this->assertEquals(2, $this->post->likeCounts->count);
+        $this->assertEquals(2, $this->post->fresh()->likeCounts->count);
         // dd(DB::getQueryLog());
     }
 
@@ -32,8 +32,8 @@ class LikeCountTest extends TestCase
     {
         $this->createLoggedInUser();
         $this->post->likeIt();
-        $this->assertEquals(1, $this->post->likeCounts->count);
-        $this->post->unLikeIt();
+        $this->assertEquals(1, $this->post->fresh()->likeCounts->count);
+        $this->post->fresh()->unLikeIt();
         $this->assertEquals(0, $this->post->fresh()->likeCounts->count);
     }
 
