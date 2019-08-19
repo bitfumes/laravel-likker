@@ -6,10 +6,10 @@ use Illuminate\Database\Eloquent\Model;
 
 class LikeCount extends Model
 {
-    protected $fillable = ['likeable_id', 'likeable_type'];
+    protected $fillable = ['likeable_id', 'likeable_type', 'count'];
 
     protected $casts = [
-        'count' => 'integer'
+        'count' => 'integer',
     ];
 
     /**

@@ -14,8 +14,6 @@ interface Likeable
 
     public function countLikes();
 
-    public function countExists();
-
     public function incrementCount();
 
     public function decrementCount();

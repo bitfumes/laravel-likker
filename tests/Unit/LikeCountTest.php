@@ -2,6 +2,7 @@
 
 namespace Bitfumes\Likker\Tests\Unit;
 
+use Illuminate\Support\Facades\DB;
 use Bitfumes\Likker\Tests\TestCase;
 
 class LikeCountTest extends TestCase
@@ -21,7 +22,9 @@ class LikeCountTest extends TestCase
         $this->post->likeIt();
         $this->createLoggedInUser();
         $this->post->likeIt();
-        $this->assertEquals(2, $this->post->countLikes());
+        // DB::enableQueryLog();
+        $this->assertEquals(2, $this->post->likeCounts->count);
+        // dd(DB::getQueryLog());
     }
 
     /** @test */
@@ -29,14 +32,14 @@ class LikeCountTest extends TestCase
     {
         $this->createLoggedInUser();
         $this->post->likeIt();
-        $this->assertEquals(1, $this->post->countLikes());
+        $this->assertEquals(1, $this->post->likeCounts->count);
         $this->post->unLikeIt();
-        $this->assertEquals(0, $this->post->countLikes());
+        $this->assertEquals(0, $this->post->likeCounts->count);
     }
 
     /** @test */
     public function if_there_is_no_likes_then_it_should_return_zero()
     {
-        $this->assertEquals(0, $this->post->countLikes());
+        $this->assertEquals(0, $this->post->likeCounts()->count());
     }
 }

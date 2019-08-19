@@ -2,9 +2,9 @@
 
 namespace Bitfumes\Likker\Tests\Models;
 
-use Illuminate\Database\Eloquent\Model;
-use Bitfumes\Likker\Contracts\Likeable;
 use Bitfumes\Likker\Traits\CanBeLiked;
+use Bitfumes\Likker\Contracts\Likeable;
+use Illuminate\Database\Eloquent\Model;
 
 class Post extends Model implements Likeable
 {

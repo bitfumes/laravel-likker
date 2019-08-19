@@ -20,7 +20,7 @@ trait CanBeLiked
      */
     public function likeCounts()
     {
-        return $this->morphMany(LikeCount::class, 'likeable');
+        return $this->morphOne(LikeCount::class, 'likeable');
     }
 
     /**
@@ -33,7 +33,7 @@ trait CanBeLiked
     {
         if (!$this->isLiked()) {
             $this->likes()->create([
-                'user_id'=> $user ? $user->id : auth()->id()
+                'user_id'=> $user ? $user->id : auth()->id(),
             ]);
             $this->incrementCount();
         }
@@ -63,7 +63,7 @@ trait CanBeLiked
         return $this->likes()->where([
             'user_id'       => $user ? $user->id : auth()->id(),
             'likeable_type' => get_class($this),
-            'likeable_id'   => $this->id
+            'likeable_id'   => $this->id,
         ])->first();
     }
 
@@ -82,20 +82,7 @@ trait CanBeLiked
      */
     public function countLikes()
     {
-        return $this->countExists() ? $this->countExists()->count : 0;
-    }
-
-    /**
-     * Check if count entry exists in database
-     * @return mixed
-     */
-    public function countExists()
-    {
-        return $this->likeCounts()
-                    ->where([
-                        'likeable_id'  => $this->id,
-                        'likeable_type'=> get_class($this)
-                    ])->first();
+        return $this->likeCounts ? $this->likeCounts->count : 0;
     }
 
     /**
@@ -105,11 +92,10 @@ trait CanBeLiked
      */
     public function incrementCount()
     {
-        if (!$this->countExists()) {
+        if (!$this->likeCounts()->count()) {
             return $this->likeCounts()->create();
         }
-
-        $this->countExists()->increment('count');
+        $this->likeCounts()->increment('count');
     }
 
     /**
@@ -117,6 +103,6 @@ trait CanBeLiked
      */
     public function decrementCount()
     {
-        $this->countExists()->decrement('count');
+        $this->likeCounts->decrement('count');
     }
 }
