@@ -34,7 +34,7 @@ class LikeCountTest extends TestCase
         $this->post->likeIt();
         $this->assertEquals(1, $this->post->likeCounts->count);
         $this->post->unLikeIt();
-        $this->assertEquals(0, $this->post->likeCounts->count);
+        $this->assertEquals(0, $this->post->fresh()->likeCounts->count);
     }
 
     /** @test */

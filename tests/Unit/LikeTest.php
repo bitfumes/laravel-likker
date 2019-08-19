@@ -3,6 +3,7 @@
 namespace Bitfumes\Likker\Tests\Unit;
 
 use Bitfumes\Likker\LikeCount;
+use Illuminate\Support\Facades\DB;
 use Bitfumes\Likker\Tests\TestCase;
 
 class LikeTest extends TestCase
@@ -48,8 +49,11 @@ class LikeTest extends TestCase
     /** @test */
     public function like_can_be_done_by_other_user()
     {
+        $user = $this->createLoggedInUser();
+        $this->post->likeIt();
         $user = $this->createUser();
         $this->post->likeIt($user);
+        $this->assertEquals(2, $this->post->likeCounts->count);
         $this->assertDatabaseHas('likes', ['user_id'=>$user->id]);
     }
 
@@ -86,9 +90,11 @@ class LikeTest extends TestCase
     public function it_can_only_unlike_once_by_a_user()
     {
         $this->createLoggedInUser();
+        // DB::enableQueryLog();
         $this->post->likeIt();
         $this->post->unLikeIt();
         $this->post->unLikeIt();
+        // dd(DB::getQueryLog());
         $this->assertEquals(0, $this->post->likeCounts->count);
     }
 }

@@ -31,7 +31,7 @@ trait CanBeLiked
      */
     public function likeIt($user = null)
     {
-        if (!$this->isLiked()) {
+        if (!$this->isLiked($user)) {
             $this->likes()->create([
                 'user_id'=> $user ? $user->id : auth()->id(),
             ]);
@@ -60,11 +60,7 @@ trait CanBeLiked
      */
     public function isLiked($user = null)
     {
-        return $this->likes()->where([
-            'user_id'       => $user ? $user->id : auth()->id(),
-            'likeable_type' => get_class($this),
-            'likeable_id'   => $this->id,
-        ])->first();
+        return $this->load('likes')->likes->where('user_id', $user ? $user->id : auth()->id())->first();
     }
 
     /**
@@ -103,6 +99,6 @@ trait CanBeLiked
      */
     public function decrementCount()
     {
-        $this->likeCounts->decrement('count');
+        $this->likeCounts()->decrement('count');
     }
 }
