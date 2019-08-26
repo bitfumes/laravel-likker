@@ -28,6 +28,20 @@ class LikeCountTest extends TestCase
     }
 
     /** @test */
+    public function it_can_toggle_like_count_many_times()
+    {
+        $this->createLoggedInUser();
+        $this->post->likeIt();
+        $this->assertEquals(1, $this->post->fresh()->likeCounts->count);
+        $this->post->fresh()->unLikeIt();
+        $this->assertEquals(0, $this->post->fresh()->likeCounts->count);
+        $this->post->fresh()->likeIt();
+        $this->assertEquals(1, $this->post->fresh()->likeCounts->count);
+        // DB::enableQueryLog();
+        // dd(DB::getQueryLog());
+    }
+
+    /** @test */
     public function it_can_decrement_like_count()
     {
         $this->createLoggedInUser();

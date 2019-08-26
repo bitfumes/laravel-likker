@@ -88,7 +88,7 @@ trait CanBeLiked
      */
     public function incrementCount()
     {
-        if (!$this->countLikes()) {
+        if (!$this->likeCounts) {
             return $this->likeCounts()->create();
         }
         $this->likeCounts->increment('count');
